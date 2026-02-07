@@ -1,42 +1,35 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {View, StyleSheet, Text} from "react-native";
 import {subDays, format} from 'date-fns';
 
+interface Logs{
+        id:number;
+        active_date:string;
+    };
 
 const ConsistencyGraph = () =>{
     const days = Array(140).fill(null);
-    // how database is going to return the data
-    // testing purpose
-    const activeDays = [
-    "2026-02-03",
-    "2026-02-01",
-    "2026-01-30",
-    "2026-01-25",
-    "2026-01-22",
-    "2026-01-14",
-    "2026-01-08",
-    "2026-01-02",
-    "2025-12-29",
-    "2025-12-24",
-    "2025-12-18",
-    "2025-12-15",
-    "2025-12-09",
-    "2025-12-05",
-    "2025-11-30",
-    "2025-11-22",
-    "2025-11-17",
-    "2025-11-11",
-    "2025-11-04",
-    "2025-10-29",
-    "2025-10-21",
-    "2025-10-15",
-    "2025-10-08",
-    "2025-10-01",
-    "2025-09-25",
-    "2025-09-18"
-];
-    let currDate = new Date();
-                        
+
+    const [activeDays, setActiveDays] = useState<string[]>([]);
+
+    useEffect(() => {
+
+        const fetchDates = async () =>{
+            try{
+                const response = await fetch("http://192.168.1.10:8080/api/activeDays");
+                const data:Logs[] = await response.json();
+
+                const newDates = data.map((item) => item.active_date);
+
+                setActiveDays(newDates);
+            }
+            catch(error){
+                console.log("Error:", error);
+            }
+        };
+
+        fetchDates();
+    }, []);
 
     return(
         <View style = {styles.container}>
@@ -87,7 +80,7 @@ const styles = StyleSheet.create({
         borderRadius: 2,
     },
     activeBox:{
-        backgroundColor: '#4ade80',
+        backgroundColor: '#654ade',
     }
     
 });
