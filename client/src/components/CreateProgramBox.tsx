@@ -1,12 +1,17 @@
 // when clicked on this icon, it takes me to another page where i can create a workout plan
 
-import { View,  StyleSheet, Text} from 'react-native';
+import { View,  StyleSheet, Text, Button, Pressable} from 'react-native';
+
 
 const CreateProgramBox = () => {
     return(
-        <View style = {styles.container}>
+        <Pressable onPress={() => console.log("Pressed")}
+            style={({pressed}) => [
+                styles.container,
+                (pressed) ? styles.buttonPressed : null
+            ]}>
             <Text style = {styles.innerText}> + Create Program</Text>
-        </View>
+        </Pressable>
     );
 }
 
@@ -24,7 +29,11 @@ const styles = StyleSheet.create({
         fontFamily: 'ui-monospace',
         fontWeight: 'bold',
         color: 'rgb(226, 223, 210)'
+    },
+    buttonPressed: {
+        opacity: 0.7, 
     }
+
 });
 
 export default CreateProgramBox;
