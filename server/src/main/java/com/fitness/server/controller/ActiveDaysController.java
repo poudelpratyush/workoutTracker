@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@RequestMapping("api/activedays")
+@RequestMapping("/api/activeDays")
 @CrossOrigin(origins = "*")
 public class ActiveDaysController {
 
