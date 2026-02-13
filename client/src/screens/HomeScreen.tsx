@@ -1,26 +1,31 @@
 import React from "react";
 import {View, Text, StyleSheet} from 'react-native';
+import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
+import ConsistencyGraph from "../components/HomeScreen/ConsistencyGraph";
+import CreateProgramBox from "../components/HomeScreen/CreateProgramBox";
+import HPAddAWorkout from "../components/HomeScreen/StartDayOne";
+import StartEmptyWorkout from "../components/HomeScreen/StartEmptyWorkout";
 
 const HomeScreen = () => {
     return(
-        <View style = {styles.container}>
-            <Text style = {styles.text}>Welcome to my fitness app</Text>
-        </View>
-
+        <SafeAreaView>
+            <View style = {styles.container}>
+                <View style = {styles.items}>
+                    <ConsistencyGraph/>
+                    <StartEmptyWorkout/>
+                    <CreateProgramBox/>
+                </View>
+            </View>
+        </SafeAreaView>
     );
 }
 
 const styles = StyleSheet.create({
     container:{
-        flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#f5f5f5'
     },
-    text: {
-        fontSize: 24,
-        fontWeight: 'bold',
-        marginBottom:20,
+    items:{
     }
 });
 
