@@ -1,6 +1,6 @@
 import React from "react";
-import {View, Text, StyleSheet} from 'react-native';
-import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
+import {View, ScrollView, StyleSheet} from 'react-native';
+import { SafeAreaView} from "react-native-safe-area-context";
 import ConsistencyGraph from "../components/HomeScreen/ConsistencyGraph";
 import CreateProgramBox from "../components/HomeScreen/CreateProgramBox";
 import HPAddAWorkout from "../components/HomeScreen/StartDayOne";
@@ -8,24 +8,34 @@ import StartEmptyWorkout from "../components/HomeScreen/StartEmptyWorkout";
 
 const HomeScreen = () => {
     return(
-        <SafeAreaView>
-            <View style = {styles.container}>
-                <View style = {styles.items}>
+        <SafeAreaView style= {{flex: 1}}>
+            <ScrollView contentContainerStyle = {styles.container}>
+                <View style = {styles.top}>
                     <ConsistencyGraph/>
+                </View>
+                <View style = {styles.bottom}>
                     <StartEmptyWorkout/>
                     <CreateProgramBox/>
                 </View>
-            </View>
+            </ScrollView>
         </SafeAreaView>
     );
 }
 
 const styles = StyleSheet.create({
     container:{
-        justifyContent: 'center',
+        flexGrow: 1,
+        justifyContent: 'space-between',
+    },
+    top:{
+        paddingTop: 20,
         alignItems: 'center',
     },
-    items:{
+    bottom:{
+        width: '100%',
+        paddingBottom: 20,
+        alignItems: 'center',
+        gap: 20,
     }
 });
 
