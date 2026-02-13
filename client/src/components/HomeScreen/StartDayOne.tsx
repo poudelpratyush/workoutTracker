@@ -15,6 +15,7 @@ const StartDayOne = () => {
 const styles = StyleSheet.create({
     container: {
         backgroundColor: 'rgb(52, 52, 52)',
+        width: '100%',
         maxWidth: '85%', 
         height: 220,
         borderRadius: 15,

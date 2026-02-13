@@ -59,12 +59,14 @@ const ConsistencyGraph = () =>{
 
 const styles = StyleSheet.create({
     container:{
-        width: '85%',
+        width: '100%',
         maxWidth: '85%',
         backgroundColor: 'rgb(52, 52, 52)',
         borderRadius: 15,
         padding: 15,
         alignItems: 'center',
+        height: 130,
+        justifyContent: 'center',
     },
     grid:{
         height: 108,

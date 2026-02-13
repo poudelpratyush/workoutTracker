@@ -18,7 +18,7 @@ const StartEmptyWorkout = () => {
 const styles = StyleSheet.create({
     container: {
         maxWidth: '85%',
-        width: '85%',
+        width: '100%',
         height: 80,
         borderRadius: 15,
         backgroundColor: 'rgb(52, 52, 52)',
