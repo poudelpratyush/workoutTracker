@@ -19,7 +19,7 @@ To view
 ```
 cd backend
 ```
-### 2. Configure your enviroment variables. Update src/main/resources/application.properties
+### 2. Configure your enviroment variables. Update `src/main/resources/application.properties`
 
 ### 3. Start the Spring Boot server
 ```
@@ -35,7 +35,7 @@ cd frontend
 ```
 npm install
 ```
-### 3. Update the API base URL to local machine so that backend can connect with frontend.
+### 3. Update the API base URL to local machine so that backend can connect with frontend. `(eg, http://192.168.x.x:8080)`
 
 ### 4. Start the Expo development server
 ```
