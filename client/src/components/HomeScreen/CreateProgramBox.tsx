@@ -1,11 +1,18 @@
 // when clicked on this icon, it takes me to another page where i can create a workout plan
-import React from 'react';
+import React, { use } from 'react';
 import {StyleSheet, Text, Pressable} from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../../Types/navigation';
+
 
 
 const CreateProgramBox = () => {
+
+    const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+    
     return(
-        <Pressable onPress={() => console.log("Pressed")}
+        <Pressable onPress={() => navigation.navigate("CreateProgramScreen")}
             style={({pressed}) => [
                 styles.container,
                 (pressed) ? styles.buttonPressed : null
@@ -18,6 +25,7 @@ const CreateProgramBox = () => {
 const styles = StyleSheet.create({
     container:{
         backgroundColor: 'rgb(52, 52, 52)',
+        width: '100%',
         height: 80,
         maxWidth: '85%',
         borderRadius: 15,
@@ -37,3 +45,4 @@ const styles = StyleSheet.create({
 });
 
 export default CreateProgramBox;
+
