@@ -4,10 +4,11 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
 import HomeScreen from "./src/screens/HomeScreen";
+import CreateProgramScreen from "./src/screens/CreateProgramScreen";
 
 import ConsistencyGraph from "./src/components/HomeScreen/ConsistencyGraph";
 import CreateProgramBox from "./src/components/HomeScreen/CreateProgramBox";
-import CreateProgramScreen from "./src/screens/CreateProgramScreen";
+
 import AddANameButton from "./src/components/CreateProgram/AddANameButton";
 import StartEmptyWorkout from "./src/components/HomeScreen/StartEmptyWorkout";
 
@@ -28,9 +29,12 @@ export default function App() {
     <SafeAreaProvider>
       <NavigationContainer theme={MyTheme}>
         <Stack.Navigator screenOptions={{
-          headerShown: false
+          headerShown: false,
+          animation: 'fade',
+          animationDuration: 150,
         }}>
           <Stack.Screen name="Home" component={HomeScreen}/>
+          <Stack.Screen name= "CreateProgramScreen" component={CreateProgramScreen}/>
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>
