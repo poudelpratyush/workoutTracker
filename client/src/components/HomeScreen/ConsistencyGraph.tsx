@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from "react";
 import {View, StyleSheet, Text} from "react-native";
 import {subDays, format} from 'date-fns';
-
-interface Logs{
-        id:number;
-        active_date:string;
-    };
+import { Logs } from "../../Types/api";
 
 const ConsistencyGraph = () =>{
     const days = Array(140).fill(null);
