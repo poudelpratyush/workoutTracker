@@ -1,0 +1,75 @@
+services:
+
+  # ---------- PostgreSQL Database --------------
+
+  # Creates an isolated database server that runs entirely inside docker
+  # db acts as the web address for the database ex: url uses db instead of localhost
+  db:
+    # Tells docker what base image to get from docker hub
+    image: postgres:16-alpine
+
+    # passes startup instructions directly into the container
+    # the base image is programmed to look for these variables the very first time they turn on
+    # when it sees them it automatically maps and creates an empty database with these fields
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+
+    # Saves the file through the container life cycles
+    # inside /var/lib/postgresql/data
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+    # Maps the ports
+    # format is "HostPort:ContainerPort"
+    # allows us to use pgAdmin to visualize
+    ports:
+      - "5432:5432"
+
+    # Sets up repeating tests to see if the database is working and awake
+    healthcheck:
+      # basically runs a command in shell that checks in every 10s interval
+      # pg_isready is a built in postgres tool and this line asks if we are accepting
+      # any connections from the user postgres
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      # if postgres takes more then 5s to answer docker considers that this is a failure
+      timeout: 5s
+      # tries the test 5 times in a row
+      retries: 5
+
+
+  # ---------- SpringBoot Backend ----------
+  # basically named our java service if another container needs to talk to the api it could use backend as url
+  backend:
+    # Instead of pulling in a premade image from the hub like we did for the db 
+    # we create a new one using out image blueprint we made in Dockerfile
+    # it is going to find that instructions in the ./server and in the dockerfile
+    # then it runs the multi stage build
+    build:
+      # where
+      context: ./server
+      # what directory has blueprint
+      dockerfile: Dockerfile
+
+    # where this will map to
+    # where the api requests for the backend should be mapped to
+    ports:
+      - "8080:8080"
+
+    # Uses the db service we created earlier and points to that service
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/postgres
+      SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER}
+      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD}
+
+    # It forces the health check we added for db to successfuly run before starting the spring container
+    # basically a safety net guarantees that the API will never crash on startup
+    depends_on:
+      db:
+        condition: service_healthy
+
+# Top-level volumes declaration - tells Docker to manage this volume's lifecycle
+volumes:
+  postgres_data:
