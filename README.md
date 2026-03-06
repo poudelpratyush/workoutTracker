@@ -21,9 +21,11 @@ cd backend
 ```
 ### 2. Configure your enviroment variables. Update `src/main/resources/application.properties`
 
-### 3. Start the Spring Boot server
+### 3. Run the containerized backend (first time)
 ```
-./mvnw spring-boot:run
+docker compose up --build
+```
+
 ```
 ## Frontend Setup (React Native/Expo)
 
