@@ -26,7 +26,6 @@ cd backend
 docker compose up --build
 ```
 
-```
 ## Frontend Setup (React Native/Expo)
 
 ### 1. Open a new terminal and navigate to the frontend directory
