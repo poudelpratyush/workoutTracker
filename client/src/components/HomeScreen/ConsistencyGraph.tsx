@@ -12,7 +12,7 @@ const ConsistencyGraph = () =>{
 
         const fetchDates = async () =>{
             try{
-                const response = await fetch("http://192.168.1.10:8080/api/activeDays");
+                const response = await fetch(`${process.env.EXPO_BASE_URL}/api/activeDays`);
                 const data:Logs[] = await response.json();
 
                 const newDates = data.map((item) => item.active_date);
