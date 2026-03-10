@@ -19,7 +19,7 @@ COPY pom.xml .
 
 
 # chmod +x mvnw creates a maven executable and the code after downloads all the dependencies
-RUN chmod +x mvnw & ./mvnw dependency:go-offline -B
+RUN chmod +x mvnw && ./mvnw dependency:go-offline -B
 
 
 # Copies the actual java source code into the container
