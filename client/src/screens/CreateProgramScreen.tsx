@@ -1,31 +1,57 @@
-import React from "react";
-import {View, StyleSheet, Text} from 'react-native';
+import React, { useState, useEffect } from "react";
+import {View, StyleSheet, ScrollView} from 'react-native';
 import AddANameButton from "../components/CreateProgramScreen/AddANameButton";
 import { SafeAreaView } from "react-native-safe-area-context";
 import AddNumWeeksDropdown from "../components/CreateProgramScreen/AddNumWeeksDropdown";
+import CreateProgramButton from "../components/CreateProgramScreen/CreateProgramButton";
 
 const CreateProgramScreen = () => {
+
+    // states to validate if properly filled
+    const [programName, setProgramName] = useState("");
+    const [numWeeks, setNumWeeks] = useState(null);
+
+    useEffect(() => {
+        console.log("programName: ", programName);
+    }, [programName]);
+
+
+    const isValid = programName.trim() !== "" && numWeeks != null;
+
+
     return(
-        <SafeAreaView style = {styles.container}>
-            <View style = {styles.addName}>
-                <AddANameButton/>
-            </View>
-            <View style = {styles.addWeeks}>
-                <AddNumWeeksDropdown/>
-            </View>
+        <SafeAreaView style = {{flex: 1}}>
+            <ScrollView
+             contentContainerStyle = {styles.container}
+             keyboardShouldPersistTaps= "handled">
+                <View style = {styles.top}>
+                    <AddANameButton onNameChange = {setProgramName}/>
+                    <AddNumWeeksDropdown/>
+                </View>
+                <View style = {styles.bottom}>
+                    <CreateProgramButton/>
+                </View>
+            </ScrollView>
         </SafeAreaView>
     );
 }
 
 const styles = StyleSheet.create({
     container:{
-        flex: 1,
+        flexGrow: 1,
+        justifyContent: 'space-between',
     },
-    addName:{
-        paddingTop: 30,
+
+    top:{
+        width: '100%',
+        alignItems: 'center',
+        paddingTop:20,
+        gap: 20, 
     },
-    addWeeks:{
-        paddingTop: 30,
-    },
+    bottom:{
+        width: '100%',
+        alignItems: 'center',
+        paddingBottom: 50,
+    }
 });
 export default CreateProgramScreen;
