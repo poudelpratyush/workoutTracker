@@ -60,15 +60,10 @@ services:
 
     # Uses the db service we created earlier and points to that service
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/postgres
+      SPRING_DATASOURCE_URL: ${POSTGRES_URL}
       SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER}
       SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD}
 
-    # It forces the health check we added for db to successfuly run before starting the spring container
-    # basically a safety net guarantees that the API will never crash on startup
-    depends_on:
-      db:
-        condition: service_healthy
 
 # Top-level volumes declaration - tells Docker to manage this volume's lifecycle
 volumes:
